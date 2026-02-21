@@ -13,3 +13,6 @@ models/*.pkl
 .venv/
 __pycache__/
 .python-version
+
+# exclude data from source control by default
+#/data/

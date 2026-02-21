@@ -1,10 +1,7 @@
-from networkx import lowest_common_ancestor
 import pandas as pd
-import numpy as np
 from pathlib import Path
 import click
 import logging
-from sklearn.model_selection import train_test_split
 from check_structure import check_existing_file, check_existing_folder
 import os
 from sklearn.preprocessing import StandardScaler
@@ -27,17 +24,18 @@ def main(input_filepath, output_filepath):
 
 def process_data(input_filepath_raw, output_filepath):
 
-    df_minerals = import_dataset(input_filepath_raw, sep=";", low_memory=False)
+    df_minerals = import_dataset(input_filepath_raw, sep=",", low_memory=False)
     df_minerals = convert_columns_type_date(df_minerals)
 
     X_train, X_test, y_train, y_test = split_data_time_series(df_minerals)
-    X_train, X_test = fill_nan_values(X_train, X_test)
+    #X_train, X_test = fill_nan_values(X_train, X_test)
 
     create_folder_if_necessary(output_filepath)
     save_dataframes(X_train, X_test, y_train, y_test, output_filepath)
 
 def drop_columns(df):
     list_to_drop = ['ave_flot_air_flow', 'ave_flot_level']
+    list_to_drop = []
     df.drop(list_to_drop, axis=1, inplace=True)
     return df
 
@@ -55,8 +53,8 @@ def drop_lines_with_nan_values(df):
     return df
 
 def split_data_time_series(df):
-    target = df['silicia_concentrate']
-    feats = df.drop(['silicia_concentrate'], axis=1)
+    target = df['silica_concentrate']
+    feats = df.drop(['silica_concentrate'], axis=1)
     
     split_index = int(len(df) * 0.8)
     X_train, X_test = feats.iloc[:split_index], feats.iloc[split_index:]
