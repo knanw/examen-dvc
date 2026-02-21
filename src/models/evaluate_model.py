@@ -6,10 +6,10 @@ import json
 from pathlib import Path
 from sklearn.metrics import mean_absolute_error, r2_score
 
-X_train = pd.read_csv('data/preprocessed/X_train.csv')
-X_test = pd.read_csv('data/preprocessed/X_test.csv')
-y_train = pd.read_csv('data/preprocessed/y_train.csv')
-y_test = pd.read_csv('data/preprocessed/y_test.csv')
+X_train = pd.read_csv('data/processed_data/X_train.csv')
+X_test = pd.read_csv('data/processed_data/X_test.csv')
+y_train = pd.read_csv('data/processed_data/y_train.csv')
+y_test = pd.read_csv('data/processed_data/y_test.csv')
 y_train = np.ravel(y_train)
 y_test = np.ravel(y_test)
 
