@@ -1,2 +1,15 @@
 /venv
 /clean_data.csv
+
+
+# Daten und Modelle (werden von DVC verwaltet)
+data/raw_data/raw.csv
+data/preprocessed/
+models/*.joblib
+models/*.pth
+models/*.pkl
+
+# Python/Umgebung
+.venv/
+__pycache__/
+.python-version
